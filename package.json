@@ -1,0 +1,24 @@
+{
+  "name": "chattrbox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev" : "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keybladesonic/Chattrbox.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/keybladesonic/Chattrbox/issues"
+  },
+  "homepage": "https://github.com/keybladesonic/Chattrbox#readme",
+  "devDependencies": {
+    "nodemon": "^1.17.2"
+  }
+}
