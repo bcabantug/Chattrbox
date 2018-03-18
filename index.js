@@ -3,10 +3,15 @@ var http = require("http");
 var fs = require("fs");
 //var path = require("path");
 var extract = require("./extract");
+const mime = require("mime");
+
 
 var handleError = function(err, res){
   res.writeHead(404);
-  res.end();
+  fs.readFile("app/error.html", function(err, data){
+    res.end(data);
+  });
+  //res.end();
 }
 
 var server = http.createServer(function (req, res){
@@ -24,9 +29,12 @@ var server = http.createServer(function (req, res){
   var filePath = extract(req.url);
   fs.readFile(filePath, function (err, data){
     if (err){
+      filePath = "app/error.html";
       handleError(err, res);
       return;
     } else {
+    var MediaType = mime.getType(filePath);
+    res.setHeader("Content-Type", MediaType);
     res.end(data);
     }
   });
