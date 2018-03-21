@@ -1,3 +1,5 @@
+/*eslint-disable no-console*/
+/* global require */
 var WebSocket = require("ws");
 //create websocket server and assign port number to it
 var WebSocketServer = WebSocket.Server;
@@ -17,14 +19,14 @@ console.log("websocket server started");
 
 
 //establishing any callbacks from connection events
-ws.on("connection", function (socket){
+ws.on("connection", function(socket) {
   console.log("client connection established");
 
   //send out the current topic established
-  socket.send("*** Topic is \'" + topic + "\'");
+  socket.send("*** Topic is '" + topic + "'");
 
   //sends out all previous messages to new user/connection
-  messages.forEach(function(msg){
+  messages.forEach(function(msg) {
     socket.send(msg);
   });
 
@@ -32,29 +34,29 @@ ws.on("connection", function (socket){
 
 
   //establishing the echo server
-  socket.on("message", function(data){
+  socket.on("message", function(data) {
     var s = data.split(" ");
 
     //listen for command
-    if(s[0] == "/topic"){
+    if (s[0] == "/topic") {
       //get topic
-      var ss= s.slice(1)
+      var ss = s.slice(1);
       topic = ss.toString().replace(/,/g, " ");
       //set topic
       //setting custom command to set topic
-        console.log("Topic change: " + topic);
-        //topic = s[0];
-        //console.log(topic);
-        ws.clients.forEach(function(clientSocket){
-          clientSocket.send("*** Topic has changed to \'" + topic + "\'");
+      console.log("Topic change: " + topic);
+      topic = s[0];
+      //console.log(topic);
+      ws.clients.forEach(function(clientSocket) {
+        clientSocket.send("*** Topic has changed to '" + topic + "'");
       });
 
-    }else{
+    } else {
       console.log("message recieved: " + data);
       //push the message to the array
       messages.push(data);
       //sends the new message to all connected clients on the WebSocket
-      ws.clients.forEach(function (clientSocket){
+      ws.clients.forEach(function(clientSocket) {
         clientSocket.send(data); //works like socket.send(data)
       });
       //socket.send(data);

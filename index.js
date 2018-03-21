@@ -1,4 +1,5 @@
 /*eslint-disable no-console*/
+
 var http = require("http"); //uses http
 var fs = require("fs"); //uses fs
 //var path = require("path");
@@ -10,16 +11,16 @@ const mime = require("mime");
 var wss = require("./websockets-server");
 
 //if file path does not exist, then call handleError
-var handleError = function(err, res){
+var handleError = function(err, res) {
   res.writeHead(404); //write error to browser
   //read the 404 image from app/error.html
-  fs.readFile("app/error.html", function(err, data){
+  fs.readFile("app/error.html", function(err, data) {
     res.end(data);
   });
   //res.end();
 }
 
-var server = http.createServer(function (req, res){
+var server = http.createServer(function(req, res) {
   console.log("Responding to a request.");
   //var url = req.url;
 
@@ -32,17 +33,17 @@ var server = http.createServer(function (req, res){
 
   //res.end("<h1>Hello, World!!</h1>");
   var filePath = extract(req.url);
-  fs.readFile(filePath, function (err, data){
-    if (err){
+  fs.readFile(filePath, function(err, data) {
+    if (err) {
       filePath = "app/error.html";
       handleError(err, res);
       return;
     } else {
       //media type detected using mime.getType
-    var MediaType = mime.getType(filePath);
-    //sets the header of the content type to whatever is detected
-    res.setHeader("Content-Type", MediaType);
-    res.end(data);
+      var MediaType = mime.getType(filePath);
+      //sets the header of the content type to whatever is detected
+      res.setHeader("Content-Type", MediaType);
+      res.end(data);
     }
   });
 });

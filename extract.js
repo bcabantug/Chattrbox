@@ -1,11 +1,12 @@
-/*eslint-disable no-console*/
+/* global require module __dirname */
+/*eslint no-undef: "error"*/
 var path = require("path");
-
-var extractFilePath = function (url){
+/*eslint-disable no-console*/
+var extractFilePath = function(url) {
   var filePath;
   var fileName = "index.html";
 
-  if(url.length > 1){
+  if (url.length > 1) {
     fileName = url.substring(1);
   }
   console.log("The fileName is: " + fileName);
