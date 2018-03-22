@@ -1,4 +1,7 @@
 /*eslint-disable no-console*/
+/*eslint no-unused-vars: "error"*/
+/* global require wss*/
+/*exported wss*/
 
 var http = require("http"); //uses http
 var fs = require("fs"); //uses fs
@@ -6,7 +9,7 @@ var fs = require("fs"); //uses fs
 //calls extrack.js to start when index.js is run
 var extract = require("./extract");
 //mime to detect file extensions
-const mime = require("mime");
+var mime = require("mime");
 //establish the websocketserver to initialize with the other modules when index.js runs
 var wss = require("./websockets-server");
 
@@ -18,7 +21,7 @@ var handleError = function(err, res) {
     res.end(data);
   });
   //res.end();
-}
+};
 
 var server = http.createServer(function(req, res) {
   console.log("Responding to a request.");
